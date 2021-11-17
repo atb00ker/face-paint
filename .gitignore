@@ -1,0 +1,33 @@
+# Node environment
+.cache.json
+node_modules/
+dist/
+.tmp
+.env
+node_build/
+
+# Python/Django environment
+Pipfile*
+local_settings.py
+__pycache__/
+/venv
+
+# Sqlite
+*sqlite3*
+
+# Testing
+coverage/
+
+# Misc
+.DS_Store
+._*
+Thumbs.db
+.cache
+.settings
+.tmproj
+*.diff
+*.err
+*.log
+*.vi
+*~
+.#*
