@@ -1,4 +1,4 @@
-"""prdtemplate URL Configuration
+"""face-paint URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls.conf import include
 
 urlpatterns = [
-    path('api/v1/', include('server.users.urls')),
-    path('api/v1/', include('server.prd.urls')),
-    path('admin/', admin.site.urls),
+    path("api/v1/", include("server.users.urls")),
+    path("api/v1/", include("server.face_paint.urls")),
+    path("admin/", admin.site.urls),
 ]

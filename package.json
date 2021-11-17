@@ -1,7 +1,7 @@
 {
-  "name": "PRD",
+  "name": "FacePaint",
   "version": "0.1.0",
-  "description": "PRD",
+  "description": "FacePaint",
   "author": "Ajay Tripathi <ajay39in@gmail.com> (https://atb00ker.github.io)",
   "scripts": {
     "react": "webpack serve --open --mode development",
