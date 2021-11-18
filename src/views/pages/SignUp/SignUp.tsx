@@ -6,13 +6,15 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/esm/Container';
 import { Redirect, useHistory } from 'react-router';
 import Form from 'react-bootstrap/Form';
+
 import { HTTPResponse, signUpRequest } from '../../helpers/axios';
-import { ILogin, ISignUp } from '../../types/User';
+import { ISignUp } from '../../types/User';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
 import { RouterPath } from '../../enums/UrlPath';
 import { AuthRequiredImage } from '../../components/ContentState/AuthRequiredImage';
-import './signup.scss';
 import { PageState } from '../../enums/PageStates';
+import { PageLoader } from '../../components/ContentState/PageLoader';
+import './signup.scss';
 
 const SignUp = () => {
   const auth = useContext(AuthContext);
@@ -50,9 +52,13 @@ const SignUp = () => {
     setShowLoader(state == PageState.Loading);
   };
 
-  if (auth.state && auth.state.isAuthenticated) {
-    return <Redirect to={RouterPath.Home} />;
+  if (auth.state && !auth.state.isAuthenticated) {
+    if (auth.state.isReady)
+      return <Redirect to={RouterPath.Home} />;
+    else
+      return <PageLoader />;
   }
+
   return (
     <Container>
       <Row>

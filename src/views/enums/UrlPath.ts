@@ -1,3 +1,5 @@
+import { Router } from "react-router"
+
 export enum RouterPath {
   Home = '/',
   Login = '/login/',
@@ -6,6 +8,10 @@ export enum RouterPath {
   Dashboard = '/dashboard/',
   SignUp = '/signup/',
   Editor = '/editor/:uuid/',
+}
+
+export const getRouterPathEditor = (uuid: string) => {
+  return RouterPath.Editor.replace(":uuid", uuid);
 }
 
 export enum ServerPath {

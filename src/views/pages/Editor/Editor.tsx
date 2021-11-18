@@ -1,15 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import CanvasDraw, { CanvasDrawProps } from 'react-canvas-draw';
-import { getImageInfo, saveImageInfo } from '../../helpers/axios';
+import { Redirect, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import CanvasDraw, { CanvasDrawProps } from 'react-canvas-draw';
 import Colorful from '@uiw/react-color-colorful';
-import Form from 'react-bootstrap/esm/Form';
+
+import { getImageInfo, saveImageInfo } from '../../helpers/axios';
+import { AuthContext } from '../../components/Authentication/AuthProvider';
+import { RouterPath } from '../../enums/UrlPath';
 import './editor.scss';
+import { PageLoader } from '../../components/ContentState/PageLoader';
 
 const Editor: FC = (props: any) => {
+  const auth = useContext(AuthContext);
+  const [loading, setShowLoader] = useState(false);
+  const [error, setShowError] = useState(false);
   const [canvasRef, setCanvasRef] = useState<CanvasDraw | null>(null);
   const [canvasPenColor, setCanvasPenColor] = useState('#c0c0c0c0');
   const [canvasPenSize, setCanvasPenSize] = useState(12);
@@ -58,6 +66,13 @@ const Editor: FC = (props: any) => {
     const form = event.currentTarget;
     setCanvasPenSize(form.elements.size.value);
   };
+
+  if (auth.state && !auth.state.isAuthenticated) {
+    if (auth.state.isReady)
+      return <Redirect to={RouterPath.Home} />;
+    else
+      return <PageLoader />;
+  }
 
   return (
     <Container fluid>

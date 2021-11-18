@@ -1,0 +1,32 @@
+// Canvas
+
+.canvas-card {
+  height: 250px;
+  width: 100%;
+  max-width: 250px;
+  overflow: hidden;
+  margin: 10px;
+}
+
+#add-canvas-card {
+  position: relative;
+  background-color: #e6e6e6;
+  height: 250px;
+  width: 100%;
+  border: 0;
+}
+
+#add-canvas-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+// Upload
+
+#upload-model-header {
+  padding: 0.35rem 1rem;
+}
