@@ -19,6 +19,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     path("api/v1/", include("server.users.urls")),
-    path("api/v1/", include("server.face_paint.urls")),
+    path("api/v1/image/", include("server.canvas.urls")),
     path("admin/", admin.site.urls),
 ]

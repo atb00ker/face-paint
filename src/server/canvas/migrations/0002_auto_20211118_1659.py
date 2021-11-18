@@ -7,7 +7,7 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('face_paint', '0001_initial'),
+        ('canvas', '0001_initial'),
     ]
 
     operations = [
