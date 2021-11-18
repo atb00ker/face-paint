@@ -7,6 +7,7 @@ import { RouterPath } from './enums/UrlPath';
 import { AuthProvider } from './components/Authentication/AuthProvider';
 import { Login } from './pages/Login/Login';
 import { SignUp } from './pages/SignUp/SignUp';
+import { Editor } from './pages/Editor/Editor';
 import { Home } from './pages/Home/Home';
 import './index.scss';
 
@@ -16,6 +17,7 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
+          <Route exact path={RouterPath.Editor} component={Editor} />
           <Route exact path={RouterPath.SignUp} component={SignUp} />
           <Route exact path={RouterPath.Login} component={Login} />
           <Route exact path={RouterPath.Home} component={Home} />

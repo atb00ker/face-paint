@@ -50,7 +50,7 @@ const Login = () => {
     <Container>
       <Row>
         <Col>
-          <AuthRequiredImage height='550px' width='100%' imgHeight='550px'  />
+          <AuthRequiredImage height='550px' width='100%' imgHeight='550px' />
           <Card id='login-form-card'>
             <Card.Body>
               <Card.Title>

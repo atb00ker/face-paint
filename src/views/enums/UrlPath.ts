@@ -4,7 +4,8 @@ export enum RouterPath {
   Logout = '/logout/',
   About = '/about/',
   Dashboard = '/dashboard/',
-  SignUp = "/signup/"
+  SignUp = '/signup/',
+  Editor = '/editor/:uuid/',
 }
 
 export enum ServerPath {
