@@ -13,6 +13,7 @@ import './login.scss';
 import { AuthReducer } from '../../enums/Reducers';
 import { RouterPath } from '../../enums/UrlPath';
 import { AuthRequiredImage } from '../../components/ContentState/AuthRequiredImage';
+import { PageLoader } from '../../components/ContentState/PageLoader';
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -44,7 +45,15 @@ const Login = () => {
         setError(true);
       });
   };
-  if (auth.state && auth.state.isAuthenticated) return <Redirect to={RouterPath.Home} />;
+
+  if (auth.state && !auth.state.isAuthenticated) {
+    if (auth.state.isReady)
+      return <Redirect to={RouterPath.Home} />;
+    else
+      return <PageLoader />;
+  }
+
+
 
   return (
     <Container>
