@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     # FacePaint Apps
     "server.users",
-    "server.face_paint",
+    "server.canvas",
 ]
 
 MIDDLEWARE = [
