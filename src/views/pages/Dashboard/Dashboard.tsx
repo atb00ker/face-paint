@@ -30,17 +30,13 @@ const Dashboard: FC = () => {
 
   useEffect(() => {
     getUserCanvasList()
-      .then(response => {
-        setUserCanvasList(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      })
-  }, [])
+      .then(response => setUserCanvasList(response.data))
+      .catch(error => console.error(error));
+  }, []);
 
   const getCanvasDetailsPage = (uuid: string) => {
-    history.push(getRouterPathEditor(uuid))
-  }
+    history.push(getRouterPathEditor(uuid));
+  };
 
   const handleCreateCanvas = (event: any) => {
     event.preventDefault();
@@ -69,10 +65,8 @@ const Dashboard: FC = () => {
   };
 
   if (auth.state && !auth.state.isAuthenticated) {
-    if (auth.state.isReady)
-      return <Redirect to={RouterPath.Home} />;
-    else
-      return <PageLoader />;
+    if (auth.state.isReady) return <Redirect to={RouterPath.Home} />;
+    else return <PageLoader />;
   }
 
   if (error) {
@@ -102,10 +96,11 @@ const Dashboard: FC = () => {
             return (
               <Col xs={12} sm={6} lg={4} xl={3} key={canvas.id} className='d-flex-center'>
                 <Card className='canvas-card' onClick={() => getCanvasDetailsPage(canvas.id || '')}>
-                  <Card.Img className="canvas-image-cover" src={canvas.imageUri} />
+                  <Card.Img className='canvas-image-cover' src={canvas.imageUri} />
                 </Card>
               </Col>
-          )})}
+            );
+          })}
         </Row>
       )}
       {!!loading && <SectionLoader height='100%' width='100%' />}
