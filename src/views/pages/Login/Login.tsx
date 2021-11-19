@@ -46,14 +46,10 @@ const Login = () => {
       });
   };
 
-  if (auth.state && !auth.state.isAuthenticated) {
-    if (auth.state.isReady)
-      return <Redirect to={RouterPath.Home} />;
-    else
-      return <PageLoader />;
+  if (auth.state && auth.state.isAuthenticated) {
+    if (auth.state.isReady) return <Redirect to={RouterPath.Home} />;
+    else return <PageLoader />;
   }
-
-
 
   return (
     <Container>

@@ -53,7 +53,7 @@ export const getUserCanvasList = (): Promise<HTTPResponse<Array<ICanvas>>> => {
       { id: '69b2a199-72c0-4406-90b4-2aa5743a77dc', imageUri: 'https://thispersondoesnotexist.com/image' },
       { id: '69b2a199-72c0-4406-90b4-2aa5743a77dd', imageUri: 'https://thispersondoesnotexist.com/image' },
       { id: '69b2a199-72c0-4406-90b4-2aa5743a77de', imageUri: 'https://thispersondoesnotexist.com/image' },
-      { id: '69b2a199-72c0-4406-90b4-2aa5743a77df', imageUri: 'https://thispersondoesnotexist.com/image' }
+      { id: '69b2a199-72c0-4406-90b4-2aa5743a77df', imageUri: 'https://thispersondoesnotexist.com/image' },
     ],
     status: 200,
     statusText: 'Success',

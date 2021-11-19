@@ -43,11 +43,6 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          <Link to={RouterPath.About}>
-            <Button className='m-1 me-1 btn-sm' variant='primary'>
-              About
-            </Button>
-          </Link>
           <div style={{ flex: '1 1 auto' }}></div>
           {!auth.state.isReady && (
             <Button disabled className='m-1 me-4 btn-sm' variant='primary'>

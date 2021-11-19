@@ -1,18 +1,15 @@
-import { Router } from "react-router"
-
 export enum RouterPath {
   Home = '/',
   Login = '/login/',
   Logout = '/logout/',
-  About = '/about/',
   Dashboard = '/dashboard/',
   SignUp = '/signup/',
   Editor = '/editor/:uuid/',
 }
 
 export const getRouterPathEditor = (uuid: string) => {
-  return RouterPath.Editor.replace(":uuid", uuid);
-}
+  return RouterPath.Editor.replace(':uuid', uuid);
+};
 
 export enum ServerPath {
   Login = '/api/v1/users/login/',
