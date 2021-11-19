@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -11,7 +11,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import PlaceHolderImage from '../../assets/images/placeholder.jpg';
 import { PageState } from '../../enums/PageStates';
 import { ICanvas } from '../../types/Canvas';
-import { createCanvas, HTTPResponse } from '../../helpers/axios';
+import { createCanvas, getUserCanvasList, HTTPResponse } from '../../helpers/axios';
 import { getRouterPathEditor, RouterPath } from '../../enums/UrlPath';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
 import { SectionLoader } from '../../components/ContentState/SectionLoader';
@@ -19,13 +19,28 @@ import { ServerRequestError } from '../../components/ContentState/ServerRequestE
 import { PageLoader } from '../../components/ContentState/PageLoader';
 import './dashboard.scss';
 
-const Dashboard: FC = (props: any) => {
+const Dashboard: FC = () => {
   const auth = useContext(AuthContext);
   const history = useHistory();
   const [showUploadPopup, setShowUploadPopup] = useState(false);
+  const [userCanvasList, setUserCanvasList] = useState(Array<ICanvas>());
   const [loading, setShowLoader] = useState(false);
   const [validated, setValidated] = useState(false);
   const [error, setShowError] = useState(false);
+
+  useEffect(() => {
+    getUserCanvasList()
+      .then(response => {
+        setUserCanvasList(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }, [])
+
+  const getCanvasDetailsPage = (uuid: string) => {
+    history.push(getRouterPathEditor(uuid))
+  }
 
   const handleCreateCanvas = (event: any) => {
     event.preventDefault();
@@ -39,9 +54,7 @@ const Dashboard: FC = (props: any) => {
       };
 
       createCanvas(formValues)
-        .then((response: HTTPResponse<string>) => {
-          history.push(getRouterPathEditor(response.data));
-        })
+        .then((response: HTTPResponse<string>) => getCanvasDetailsPage(response.data))
         .catch((error: Error) => {
           console.error(error);
           changePageState(PageState.Error);
@@ -85,6 +98,14 @@ const Dashboard: FC = (props: any) => {
               </svg>
             </Card>
           </Col>
+          {userCanvasList.map(canvas => {
+            return (
+              <Col xs={12} sm={6} lg={4} xl={3} key={canvas.id} className='d-flex-center'>
+                <Card className='canvas-card' onClick={() => getCanvasDetailsPage(canvas.id || '')}>
+                  <Card.Img className="canvas-image-cover" src={canvas.imageUri} />
+                </Card>
+              </Col>
+          )})}
         </Row>
       )}
       {!!loading && <SectionLoader height='100%' width='100%' />}

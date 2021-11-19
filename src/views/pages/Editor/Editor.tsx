@@ -11,13 +11,11 @@ import Colorful from '@uiw/react-color-colorful';
 import { getImageInfo, saveImageInfo } from '../../helpers/axios';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
 import { RouterPath } from '../../enums/UrlPath';
-import './editor.scss';
 import { PageLoader } from '../../components/ContentState/PageLoader';
+import './editor.scss';
 
 const Editor: FC = (props: any) => {
   const auth = useContext(AuthContext);
-  const [loading, setShowLoader] = useState(false);
-  const [error, setShowError] = useState(false);
   const [canvasRef, setCanvasRef] = useState<CanvasDraw | null>(null);
   const [canvasPenColor, setCanvasPenColor] = useState('#c0c0c0c0');
   const [canvasPenSize, setCanvasPenSize] = useState(12);
