@@ -77,11 +77,6 @@ DATABASES = {
     }
 }
 
-# RESTFramework
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.authentication.TokenAuthentication"]
-}
-
 # Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
