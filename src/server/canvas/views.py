@@ -1,4 +1,5 @@
 import uuid
+import json
 
 # REST Framework
 from rest_framework import serializers
@@ -26,7 +27,7 @@ class CanvasView(APIView):
 
     def post(self, request):
         img_path = request.data["image_path"]
-        drawing = request.data["drawing"]
+        drawing = json.loads(request.data["drawing"])
         canvas_id = uuid.uuid4()
         new_canvas = {
             'image_path': img_path,
@@ -67,7 +68,7 @@ class CanvasWithIDView(APIView):
 
     def post(self, request, *args, **kwargs):
         img_path = request.data["image_path"]
-        drawing = request.data["drawing"]
+        drawing = json.loads(request.data["drawing"])
         canvas_id = self.kwargs['canvas_id']
         new_canvas = { 
             'image_path': img_path,
