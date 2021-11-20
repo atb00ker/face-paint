@@ -31,26 +31,15 @@ class CanvasView(APIView):
         canvas_id = uuid.uuid4()
         new_canvas = {
             'image_path': img_path,
-<<<<<<< HEAD
-            'id': canvas_id,
-            'username': str(request.user),
-=======
             'id': canvas_id, 
             'username': str(request.user),
             'drawing': drawing,  
->>>>>>> [api] add drawing column to db model
         }
         serializer = CanvasSerializer(data=new_canvas)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< HEAD
-        canvas = Canvas.objects.create(
-            username=request.user, image_path=img_path, id=canvas_id
-        )
-=======
         canvas = Canvas.objects.create(username=request.user, image_path=img_path, drawing=drawing, id=canvas_id)
->>>>>>> [api] add drawing column to db model
         canvas.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
