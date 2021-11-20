@@ -22,6 +22,10 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(",")
 CORS_ALLOWED_ORIGINS = env("DJANGO_CORS_ALLOWED_ORIGINS").split(",")
+POSTGRES_DB_NAME = env("DB_NAME")
+POSTGRES_USER = env("DB_USER")
+POSTGRES_PASSWORD = env("DB_PASS")
+POSTGRES_HOST = env("DB_HOST")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -73,10 +77,10 @@ WSGI_APPLICATION = "server.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'facepaint',
-        'USER': 'facepaintuser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': POSTGRES_DB_NAME,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,
         'PORT': '',
     }
 }
