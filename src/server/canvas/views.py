@@ -53,7 +53,7 @@ class CanvasWithIDView(APIView):
         canvas_id = self.kwargs['canvas_id']
         all_canvas = Canvas.objects.filter(id=canvas_id)
         serializer = CanvasSerializer(all_canvas, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data[0])
 
     def post(self, request, *args, **kwargs):
         img_path = request.data["image_path"]
