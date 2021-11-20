@@ -10,4 +10,5 @@ class CanvasSerializer(ModelSerializer):
         fields = (
             'id',
             'image_path',
+            'drawing',
         )

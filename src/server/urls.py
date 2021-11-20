@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls.conf import include
 
 urlpatterns = [
-    path("api/v1/", include("server.users.urls")),
     path("api/v1/image/", include("server.canvas.urls")),
+    path("api/v1/", include("server.users.urls")),
     path("admin/", admin.site.urls),
 ]
