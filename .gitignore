@@ -1,3 +1,6 @@
+# App
+/db_images
+
 # Node environment
 .cache.json
 node_modules/
