@@ -7,18 +7,20 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('canvas', '0001_initial'),
+        ("canvas", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='canvas',
-            old_name='user',
-            new_name='username',
+            model_name="canvas",
+            old_name="user",
+            new_name="username",
         ),
         migrations.AlterField(
-            model_name='canvas',
-            name='id',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False),
+            model_name="canvas",
+            name="id",
+            field=models.UUIDField(
+                default=uuid.uuid4, editable=False, primary_key=True, serialize=False
+            ),
         ),
     ]

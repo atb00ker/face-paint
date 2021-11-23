@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 
 services:
   app:
@@ -17,7 +17,7 @@ services:
   # db:
   #   image: postgres:alpine
   #   environment:
-  #     - POSTGRES_DB=prddb
+  #     - POSTGRES_DB=facepaintdb
   #     - POSTGRES_USER=admin
   #     - POSTGRES_PASSWORD=admin
   #     - POSTGRES_HOST_AUTH_METHOD=trust

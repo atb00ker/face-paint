@@ -15,11 +15,21 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Canvas',
+            name="Canvas",
             fields=[
-                ('id', models.CharField(max_length=128, primary_key=True, serialize=False)),
-                ('image_path', models.CharField(max_length=128)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='canvas', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.CharField(max_length=128, primary_key=True, serialize=False),
+                ),
+                ("image_path", models.CharField(max_length=128)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="canvas",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

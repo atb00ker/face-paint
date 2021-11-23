@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
 import { AuthReducer } from '../../enums/Reducers';
-import { deleteAuthTokenRequest, HTTPResponse } from '../../helpers/axios';
 import { IAuth, IAuthContext, IAuthDispatcher } from '../../types/User';
 
 const AuthContext = React.createContext({} as IAuthContext);

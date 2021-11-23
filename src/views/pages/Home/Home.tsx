@@ -12,13 +12,12 @@ import Creativity1 from '../../assets/illustrations/undraw-creativity.svg';
 import './home.scss';
 import { heartFill } from '../../helpers/svgIcons';
 
-
 const Home: React.FC = () => {
+  const authorGitHub1 = 'https://github.com/vallariag/';
+  const authorGitHub2 = 'https://github.com/atb00ker/';
 
-  const authorGitHub1 = 'https://github.com/vallariag/'
-  const authorGitHub2 = 'https://github.com/atb00ker/'
-
-  return (<Container className='overflow-hidden' fluid>
+  return (
+    <Container className='overflow-hidden' fluid>
       <Row className='cover-screen'>
         <Col sm='12' className='d-flex-center'>
           <Container className='d-flex-center'>
@@ -52,7 +51,7 @@ const Home: React.FC = () => {
         image={OrganizingProjects1}
         imageWidth={'400px'}
         title='Unlimited projects'
-        description="Work on multiple projects at once, just upload the image and create a canvas for your project."
+        description='Work on multiple projects at once, just upload the image and create a canvas for your project.'
       />
       <FeatureDisplayOffWhite
         image={Creativity1}
@@ -70,8 +69,7 @@ const Home: React.FC = () => {
               <Col sm='12' className='d-flex-center text-center max-width-960'>
                 <h5>
                   Ready to unlock the Bob Ross inside of you? <br />
-                  What are you waiting for?
-                  Login and get started!
+                  What are you waiting for? Login and get started!
                 </h5>
               </Col>
             </Row>
@@ -83,14 +81,15 @@ const Home: React.FC = () => {
           Made with <span className='text-danger'>{heartFill()}</span> by{' '}
           <a className='href-no-underline' href={authorGitHub1}>
             @vallariag
-          </a> {' & '}
+          </a>{' '}
+          {' & '}
           <a className='href-no-underline' href={authorGitHub2}>
             @atb00ker
           </a>
         </Col>
       </Row>
     </Container>
-  )
+  );
 };
 
 export { Home };

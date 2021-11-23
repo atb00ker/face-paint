@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import CanvasDraw, { CanvasDrawProps } from 'react-canvas-draw';
@@ -10,15 +10,17 @@ import Colorful from '@uiw/react-color-colorful';
 
 import { getImageInfo, saveImageInfo } from '../../helpers/axios';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
-import { RouterPath } from '../../enums/UrlPath';
+import { getMediaLocation, RouterPath } from '../../enums/UrlPath';
 import { PageLoader } from '../../components/ContentState/PageLoader';
 import './editor.scss';
+import { ICanvas } from '../../types/Canvas';
 
 const Editor: FC = (props: any) => {
   const auth = useContext(AuthContext);
   const [canvasRef, setCanvasRef] = useState<CanvasDraw | null>(null);
   const [canvasPenColor, setCanvasPenColor] = useState('#c0c0c0c0');
   const [canvasPenSize, setCanvasPenSize] = useState(12);
+  const [canvasDrawings, setCanvasDrawings] = useState('{}');
   const [canvasProps, setCanvasProps] = useState({
     hideGrid: true,
     brushColor: '#444',
@@ -33,22 +35,33 @@ const Editor: FC = (props: any) => {
   });
 
   const saveImageDrawing = () => {
-    const drawing = canvasRef?.getSaveData() || '{}';
-    saveImageInfo(props.match.params.uuid, drawing);
+    const canvas: ICanvas = {
+      drawing: canvasRef?.getSaveData() || '{}',
+    };
+
+    saveImageInfo(auth.state.token, props.match.params.uuid, canvas);
   };
 
   useEffect(() => {
-    getImageInfo(props.match.params.uuid).then(response => {
+    getImageInfo(auth.state.token, props.match.params.uuid).then(response => {
       const modifiedCanvasStyles = {
         ...canvasStyles,
-        background: `url(${response.data.imageUri})`,
+        background: `url(${getMediaLocation(response?.data?.image_path || '')})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#f7f7f7',
       };
       setCanvasStyles(modifiedCanvasStyles);
+      setCanvasDrawings(response.data.drawing);
     });
-  }, []);
+  }, [auth]);
+
+  useEffect(() => {
+    const drawing = JSON.stringify(canvasDrawings);
+    if (drawing.length > 5) {
+      canvasRef?.loadSaveData(drawing);
+    }
+  }, [canvasRef, canvasDrawings]);
 
   useEffect(() => {
     const modifiedCanvasProps = {

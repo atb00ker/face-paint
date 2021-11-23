@@ -1,5 +1,5 @@
 # App
-/db_images
+db_images/
 
 # Node environment
 .cache.json

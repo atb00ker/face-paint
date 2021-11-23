@@ -15,8 +15,8 @@ const Navbar = () => {
   const auth = useContext(AuthContext);
   const history = useHistory();
   const authLogout = () => {
+    auth.dispatcher({ type: AuthReducer.Logout });
     deleteAuthTokenRequest(auth.state.token).then((_: HTTPResponse<string>) => {
-      auth.dispatcher({ type: AuthReducer.Logout });
       history.push(RouterPath.Home);
     });
   };
