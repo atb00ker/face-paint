@@ -10,13 +10,13 @@ class SignUpSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username',
-            'email',
-            'password',
+            "username",
+            "email",
+            "password",
         )
 
     def save(self):
-        password = self.validated_data.pop('password')
+        password = self.validated_data.pop("password")
         user = User.objects.create(**self.validated_data)
         user.set_password(password)
         user.save()

@@ -12,7 +12,7 @@ import PlaceHolderImage from '../../assets/images/placeholder.jpg';
 import { PageState } from '../../enums/PageStates';
 import { ICanvas } from '../../types/Canvas';
 import { createCanvas, getUserCanvasList, HTTPResponse } from '../../helpers/axios';
-import { getRouterPathEditor, RouterPath } from '../../enums/UrlPath';
+import { getMediaLocation, getRouterPathEditor, RouterPath } from '../../enums/UrlPath';
 import { AuthContext } from '../../components/Authentication/AuthProvider';
 import { SectionLoader } from '../../components/ContentState/SectionLoader';
 import { ServerRequestError } from '../../components/ContentState/ServerRequestError';
@@ -29,10 +29,12 @@ const Dashboard: FC = () => {
   const [error, setShowError] = useState(false);
 
   useEffect(() => {
-    getUserCanvasList()
-      .then(response => setUserCanvasList(response.data))
+    getUserCanvasList(auth.state.token)
+      .then(response => {
+        setUserCanvasList(response.data);
+      })
       .catch(error => console.error(error));
-  }, []);
+  }, [auth]);
 
   const getCanvasDetailsPage = (uuid: string) => {
     history.push(getRouterPathEditor(uuid));
@@ -45,12 +47,12 @@ const Dashboard: FC = () => {
     setValidated(true);
     if (form.checkValidity() === true) {
       const formValues: ICanvas = {
-        imageUri: form.elements.image.value,
+        image: form.elements.image.files[0],
         drawing: '{}',
       };
 
-      createCanvas(formValues)
-        .then((response: HTTPResponse<string>) => getCanvasDetailsPage(response.data))
+      createCanvas(auth.state.token, formValues)
+        .then((response: HTTPResponse<ICanvas>) => getCanvasDetailsPage(response.data?.id || ''))
         .catch((error: Error) => {
           console.error(error);
           changePageState(PageState.Error);
@@ -95,8 +97,8 @@ const Dashboard: FC = () => {
           {userCanvasList.map(canvas => {
             return (
               <Col xs={12} sm={6} lg={4} xl={3} key={canvas.id} className='d-flex-center'>
-                <Card className='canvas-card' onClick={() => getCanvasDetailsPage(canvas.id || '')}>
-                  <Card.Img className='canvas-image-cover' src={canvas.imageUri} />
+                <Card className='canvas-card' onClick={() => getCanvasDetailsPage(canvas?.id || '')}>
+                  <Card.Img className='canvas-image-cover' src={getMediaLocation(canvas?.image_path || '')} />
                 </Card>
               </Col>
             );

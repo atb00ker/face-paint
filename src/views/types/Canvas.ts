@@ -1,5 +1,6 @@
 export type ICanvas = {
   id?: string;
-  imageUri: string;
-  drawing?: string;
+  image?: File;
+  image_path?: string;
+  drawing: string;
 };
