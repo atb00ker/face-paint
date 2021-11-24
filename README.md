@@ -1,4 +1,4 @@
-# Face Paint Template
+# Face Paint
 
 ![Stack](https://img.shields.io/static/v1?label=stack&message=django-react&color=green)
 ![License](https://img.shields.io/github/license/atb00ker/face-paint)
