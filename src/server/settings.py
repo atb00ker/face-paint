@@ -26,6 +26,7 @@ POSTGRES_DB_NAME = env("DB_NAME")
 POSTGRES_USER = env("DB_USER")
 POSTGRES_PASSWORD = env("DB_PASS")
 POSTGRES_HOST = env("DB_HOST")
+POSTGRES_PORT = int(env("DB_PORT"))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -81,7 +82,7 @@ DATABASES = {
         "USER": POSTGRES_USER,
         "PASSWORD": POSTGRES_PASSWORD,
         "HOST": POSTGRES_HOST,
-        "PORT": "",
+        "PORT": POSTGRES_PORT,
     }
 }
 
