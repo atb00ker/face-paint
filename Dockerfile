@@ -20,7 +20,6 @@ COPY /src/ ./src/
 
 # Build
 RUN npm run build
-RUN python ./src/manage.py migrate
 
 FROM BASE
 
@@ -28,6 +27,4 @@ COPY --from=BUILD facepaint/dist/ ./dist
 
 EXPOSE 8000
 
-RUN npm run server
-# CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
 

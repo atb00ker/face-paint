@@ -4,6 +4,7 @@ services:
   app:
     image: facepaint:latest
     restart: always
+    command: python ./src/manage.py runserver migrate && python ./src/manage.py runserver runserver 
     build:
       context: .
       dockerfile: Dockerfile
