@@ -2,18 +2,33 @@ version: '2'
 
 services:
   app:
-    image: facepaint:latest
-    restart: always
-    command: python ./src/manage.py runserver migrate && python ./src/manage.py runserver runserver 
+    image: atb00ker/facepaint:latest
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - react_data:/facepaint/dist/
     ports:
       - 8000:8000
     depends_on:
       - db
     env_file:
       - .env
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
+    volumes:
+      - ./deploy/nginx/:/etc/nginx/conf.d/:ro
+      - react_data:/etc/nginx/dist/
+    entrypoint: [nginx, '-g', 'daemon off;']
+    depends_on:
+      - db
+      - app
 
   db:
     image: postgres:alpine
@@ -27,14 +42,15 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
 volumes:
   postgres_data: {}
+  react_data: {}
 
 networks:
   default:
