@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import CanvasDraw, { CanvasDrawProps } from 'react-canvas-draw';
@@ -16,6 +16,7 @@ import './editor.scss';
 import { ICanvas } from '../../types/Canvas';
 
 const Editor: FC = (props: any) => {
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const [canvasRef, setCanvasRef] = useState<CanvasDraw | null>(null);
   const [canvasPenColor, setCanvasPenColor] = useState('#c0c0c0c0');
@@ -89,6 +90,9 @@ const Editor: FC = (props: any) => {
         <Col xs={4}>
           <Row className='mt-2'>
             <Col xs={12}>
+              <Button className='m-1' onClick={() => history.push(RouterPath.Dashboard)}>
+                Back
+              </Button>
               <Button className='float-end m-1' onClick={() => saveImageDrawing()}>
                 Save
               </Button>
