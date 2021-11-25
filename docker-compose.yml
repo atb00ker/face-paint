@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - react_data:/facepaint/dist/
+      - canvas_data:/facepaint/db_images/
     ports:
       - 8000:8000
     depends_on:
@@ -25,6 +26,7 @@ services:
     volumes:
       - ./deploy/nginx/:/etc/nginx/conf.d/:ro
       - react_data:/etc/nginx/dist/
+      - canvas_data:/etc/nginx/app_media/media/
     entrypoint: [nginx, '-g', 'daemon off;']
     depends_on:
       - db
@@ -51,6 +53,7 @@ services:
 volumes:
   postgres_data: {}
   react_data: {}
+  canvas_data: {}
 
 networks:
   default:
